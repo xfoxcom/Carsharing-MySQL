@@ -11,7 +11,7 @@ public class Car {
         String name = scanner.nextLine();
         try {
             DBconnect.statement.executeUpdate("INSERT INTO CAR (NAME, COMPANY_ID) VALUES ('" + name + "', " + id + ");");
-            DBconnect.statement.executeUpdate("INSERT INTO CAR_" + compName + "(NAME) VALUES ('"+ name +"')");
+            //DBconnect.statement.executeUpdate("INSERT INTO CAR_" + compName + "(NAME) VALUES ('"+ name +"')");
             System.out.println("The car was added!");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -27,7 +27,7 @@ while (resultSet.next()) {
     i++;
 }
 if (i == 0) {
-    System.out.println("The car list is empty!");
+    System.out.println("\nThe car list is empty!");
 } else {
     ResultSet companyName = DBconnect.statement.executeQuery("SELECT NAME FROM COMPANY WHERE ID = " + id);
     if (companyName.next()) {

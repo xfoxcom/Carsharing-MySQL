@@ -60,11 +60,6 @@ public class Manager {
         System.out.println("\nEnter the company name: ");
         String name = scanner.nextLine();
         DBconnect.connect();
-        try {
-            DBconnect.statement.executeUpdate("CREATE TABLE IF NOT EXISTS CAR_" + name + " (ID INTEGER PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR NOT NULL UNIQUE)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         DBconnect.addToDB(name);
         System.out.println("The company was created!");
     }

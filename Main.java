@@ -21,16 +21,13 @@ public class Main {
             try (Statement statement = connection.createStatement()) {
                 Class.forName(JDBC_DRIVER);
                 connection.setAutoCommit(true);
-               /* statement.executeUpdate("DROP TABLE IF EXISTS CUSTOMER");
-                statement.executeUpdate("DROP TABLE IF EXISTS CAR");
-                statement.executeUpdate("DROP TABLE IF EXISTS COMPANY");*/
 
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS COMPANY (ID INTEGER PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR NOT NULL UNIQUE)");
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS CAR (ID INTEGER PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR NOT NULL UNIQUE, COMPANY_ID INTEGER NOT NULL," +
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS CAR (ID INTEGER PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR NOT NULL UNIQUE, RENTED BOOLEAN DEFAULT FALSE,COMPANY_ID INTEGER NOT NULL," +
                         " CONSTRAINT fk_id FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID))");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMER (ID INTEGER PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR NOT NULL UNIQUE, RENTED_CAR_ID INTEGER DEFAULT NULL," +
                         " CONSTRAINT FK_RENT FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID))");
-
+                statement.executeUpdate("ALTER TABLE COMPANY ALTER COLUMN ID RESTART WITH 1");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
